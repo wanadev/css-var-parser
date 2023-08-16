@@ -1,0 +1,3 @@
+#element.disabled {
+    border-left-width: var(--Element_border-left-width--disabled, var(--Radio_border-width--disabled, var(--LC-border-width--disabled, 1px)));
+}

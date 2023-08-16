@@ -1,0 +1,14 @@
+{
+    "name": "css_var_parser",
+    "version": "0.0.0",
+    "description": "List CSS variables definitions in CSS",
+    "main": "src/parser.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Damien Fernandes",
+    "license": "BSD-3-Clause",
+    "dependencies": {
+        "postcss": "^8.4.28"
+    }
+}
