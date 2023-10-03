@@ -3,7 +3,7 @@
 ## Install
 
 ```sh
-npm install <package-name>
+npm install @wanadev/css_var_parser
 ```
 
 ## Usage
@@ -19,25 +19,47 @@ CSS Example :
 JS Example :
 
 ```js
-const fs = require("fs");
-const cssVariablesParser = require("css-var-parser");
+import { readFileSync } from "fs";
+import css_var_parser from "./src/parser.js";
 
-const cssContent = fs.readFileSync("index.css", "utf-8");
-const variables = cssVariablesParser.parse(cssContent);
 
-console.log(variables);
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+const cssContent = readFileSync(__dirname + "/index.css", "utf-8");
+const variables = css_var_parser.parse(cssContent);
+
+console.log(JSON.stringify(variables));
 ```
 
 Output:
 
 ```js
-{
-  '#element.disabled': {
-    'border-left-width': [
-      '--Element_border-left-width--disabled',
-      '--Radio_border-width--disabled',
-      '--LC-border-width--disabled'
+[
+  {
+    selector: "#element.disabled",
+    properties: [
+      {
+        propertyName: "border-left-width",
+        variables: [
+          {
+            name: "--Element_border-left-width--disabled",
+            fallback: "--Radio_border-width--disabled",
+          },
+          {
+            name: "--Radio_border-width--disabled",
+            fallback: "--LC-border-width--disabled",
+          },
+          {
+            name: "--LC-border-width--disabled",
+            fallback: undefined,
+          },
+        ],
+        defaultValue: "1px",
+      }
     ]
   }
-}
+]
 ```

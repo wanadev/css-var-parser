@@ -11,33 +11,64 @@ function parse(css, options = {}) {
         parser: options.parser,
     });
 
-    const variables = {};
+    const variables = [];
     root.walkRules((rule) => {
         rule.each((decl) => {
             if (isVariableDeclaration(decl)) {
                 const name = decl.prop;
-                const meh = extractCssVarDeclaration(decl.value);
-                if (!variables[rule.selector]) {
-                    variables[rule.selector] = {};
-                }
-                variables[rule.selector][name] = meh;
-            }
-        });
-    });
+                const cssVariables = extractCssVarDeclaration(decl.value)
+                const defaultCssVariables = extractDefaultValueForCssVar(decl.value)
 
-    return variables;
+                let variable = variables.find((element) => element.selector === rule.selector)
+                if (!variable) {
+                    variable = {
+                        selector: rule.selector,
+                        properties: []
+                    }
+                    variables.push(variable)
+                }
+
+                let property = variable.properties.find((element) => element.propertyName === name)
+                if (!property) {
+                    property = {
+                        propertyName: name,
+                        variables: [],
+                        defaultValue: defaultCssVariables
+                    }
+                    variable.properties.push(property)
+                }
+
+                for (let i = 0; i < cssVariables.length; i++) {
+                    const objet = {
+                        name: cssVariables[i],
+                        fallback: (i + 1 < cssVariables.length) ? cssVariables[i + 1] : undefined
+                    }
+                    property.variables.push(objet)
+                }
+            }
+        })
+    })
+
+    return variables
 }
 
 function extractCssVarDeclaration(string) {
-    const regex = /var\((--[\w-]+)(?=[,)])/g;
+    const regex = /var\((--[\w-]+)(?=[,)])/g
+    // .*var\(.*, ?(\w+)\)*
     //   const regex = /var\((--\w+)(?=[,)])/g;
-    const matches = [];
-    let match;
+    const matches = []
+    let match
     while ((match = regex.exec(string)) !== null) {
-        matches.push(match[1]);
+        matches.push(match[1])
     }
 
-    return matches;
+    return matches
+}
+
+function extractDefaultValueForCssVar(string) {
+    const regex = /var\(.*, ?(\w+)\)*/g
+    let match = regex.exec(string)
+    return match[1]
 }
 const array = [];
 
