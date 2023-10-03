@@ -1,6 +1,7 @@
 {
     "name": "css_var_parser",
     "version": "0.1.0",
+    "type": "module",
     "description": "List CSS variables definitions in CSS",
     "main": "src/parser.js",
     "scripts": {

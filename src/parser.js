@@ -1,4 +1,5 @@
-const postcss = require("postcss");
+// const postcss = require("postcss");
+import postcss from "postcss";
 
 function isVariableDeclaration(decl) {
     return Boolean(decl.value) && decl.value.startsWith("var(--");
@@ -30,7 +31,8 @@ function parse(css, options = {}) {
 function extractCssVarDeclaration(string) {
     const regex = /var\((--[\w-]+)(?=[,)])/g;
     //   const regex = /var\((--\w+)(?=[,)])/g;
-    matches = [];
+    const matches = [];
+    let match;
     while ((match = regex.exec(string)) !== null) {
         matches.push(match[1]);
     }
@@ -39,6 +41,6 @@ function extractCssVarDeclaration(string) {
 }
 const array = [];
 
-module.exports = {
-    parse,
-};
+export default {
+    parse
+}
