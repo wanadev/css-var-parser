@@ -66,7 +66,7 @@ function extractCssVarDeclaration(string) {
 }
 
 function extractDefaultValueForCssVar(string) {
-    const regex = /var\(.*, ?(#?\w+)\)*/g
+    const regex = /var\(.*, ?(#?-?\w+)\)*/g
     let match = regex.exec(string)
     return match[1]
 }
