@@ -1,6 +1,6 @@
 {
     "name": "@wanadev/css_var_parser",
-    "version": "0.3.3",
+    "version": "0.4.0",
     "type": "module",
     "publishConfig": {
         "registry": "https://git.wanadev.org/api/v4/projects/1191/packages/npm/"
