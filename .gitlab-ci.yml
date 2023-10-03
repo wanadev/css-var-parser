@@ -1,0 +1,28 @@
+stages:
+    - install
+    - lint
+    - test
+
+default:
+    cache: &global_cache # Cache modules in between jobs
+        key: $CI_COMMIT_REF_SLUG
+        policy: pull
+        paths:
+            - node_modules/
+
+install:
+    stage: install
+    image: node:16-alpine
+    cache:
+        <<: *global_cache
+        policy: pull-push
+    script:
+        - npm ci
+
+unit_test:
+    stage: test
+    image: node:16
+    needs:
+        - install
+    script:
+        - npm run test

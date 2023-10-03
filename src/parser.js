@@ -1,21 +1,21 @@
 // const postcss = require("postcss");
-import postcss from "postcss";
+import postcss from 'postcss'
 
 function isVariableDeclaration(decl) {
-    return Boolean(decl.value) && decl.value.startsWith("var(--");
+    return Boolean(decl.value) && decl.value.startsWith('var(--')
 }
 
 function parse(css, options = {}) {
     const root = postcss.parse(css, {
         from: options.from,
         parser: options.parser,
-    });
+    })
 
-    const variables = [];
+    const variables = []
     root.walkRules((rule) => {
         rule.each((decl) => {
             if (isVariableDeclaration(decl)) {
-                const name = decl.prop;
+                const name = decl.prop
                 const cssVariables = extractCssVarDeclaration(decl.value)
                 const defaultCssVariables = extractDefaultValueForCssVar(decl.value)
 
@@ -23,7 +23,7 @@ function parse(css, options = {}) {
                 if (!variable) {
                     variable = {
                         selector: rule.selector,
-                        properties: []
+                        properties: [],
                     }
                     variables.push(variable)
                 }
@@ -33,7 +33,7 @@ function parse(css, options = {}) {
                     property = {
                         propertyName: name,
                         variables: [],
-                        defaultValue: defaultCssVariables
+                        defaultValue: defaultCssVariables,
                     }
                     variable.properties.push(property)
                 }
@@ -41,7 +41,7 @@ function parse(css, options = {}) {
                 for (let i = 0; i < cssVariables.length; i++) {
                     const objet = {
                         name: cssVariables[i],
-                        fallback: (i + 1 < cssVariables.length) ? cssVariables[i + 1] : undefined
+                        fallback: i + 1 < cssVariables.length ? cssVariables[i + 1] : undefined,
                     }
                     property.variables.push(objet)
                 }
@@ -66,15 +66,30 @@ function extractCssVarDeclaration(string) {
 }
 
 function extractDefaultValueForCssVar(string) {
-    const regex = /var\(.*, ?(#?-?\w+)\)*/g
-    let match = regex.exec(string)
-    if (match ===null) {
-        return undefined
+    let match = extractSimpleDefaultValue(string)
+    if (match === null) {
+        let matchComplex = extractComplexDefaultValue(string)
+
+        if (matchComplex === null || matchComplex[0].indexOf('var') !== -1) {
+            return undefined
+        }
+        return matchComplex[0]
     }
     return match[1]
 }
-const array = [];
+
+function extractSimpleDefaultValue(string) {
+    const regex = /var\(.*, ?(#?-?\w+)\)/g
+    return regex.exec(string)
+}
+
+function extractComplexDefaultValue(string) {
+    const regex = /(?:\w*)\([^()]*\)/g
+    return regex.exec(string)
+}
+
+const array = []
 
 export default {
-    parse
+    parse,
 }
