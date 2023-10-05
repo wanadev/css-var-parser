@@ -1,0 +1,35 @@
+  push:
+    paths:
+      - "src/**"
+      - ".github/workflows/tests.yml"
+      - "package.json"
+  pull_request:
+    paths:
+      - "src/**"
+      - ".github/workflows/tests.yml"
+      - "package.json"
+
+jobs:
+
+  build:
+
+    name: "Run tests"
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: "Checkout the repository"
+        uses: actions/checkout@v4
+
+      - name: "Set up Node"
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: "Install Node dependencies"
+        run: |
+          npm install
+
+      - name: "Run tests"
+        run: |
+          npm run test
