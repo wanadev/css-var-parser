@@ -2,7 +2,7 @@
 
 [![Lint and test](https://github.com/wanadev/css-var-parser/actions/workflows/tests.yml/badge.svg)](https://github.com/wanadev/css-var-parser/actions/workflows/tests.yml)
 [![NPM Version](http://img.shields.io/npm/v/css-var-parser.svg?style=flat)](https://www.npmjs.com/package/css-var-parser)
-[![License](http://img.shields.io/npm/l/css-var-parser.svg?style=flat)](https://github.com/wanadev/css-var-parser/blob/master/LICENSE)
+[![License](http://img.shields.io/npm/l/css-var-parser.svg?style=flat)](https://github.com/wanadev/css-var-parser/blob/main/LICENSE)
 [![Discord](https://img.shields.io/badge/chat-Discord-8c9eff?logo=discord&logoColor=ffffff)](https://discord.gg/BmUkEdMuFp)
 
 ## Install
@@ -71,9 +71,9 @@ Output:
 
 ## Changelog
 
-* **[NEXT]** (changes on master that have not been released yet):
+* **[NEXT]** (changes on main that have not been released yet):
 
-    * Nothing yet ;)
+    * Fix branch name in link LICENSE badge (@damienfern)
 
 * **v0.4.1:**
 
