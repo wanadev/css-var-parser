@@ -73,6 +73,7 @@ Output:
 
 * **[NEXT]** (changes on main that have not been released yet):
 
+    * build(deps): bump postcss from 8.4.28 to 8.4.31 (@damienfern)
     * Fix branch name in link LICENSE badge (@damienfern)
 
 * **v0.4.1:**
