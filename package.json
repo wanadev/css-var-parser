@@ -1,16 +1,17 @@
 {
-    "name": "@wanadev/css_var_parser",
+    "name": "css-var-parser",
     "version": "0.4.0",
     "type": "module",
-    "publishConfig": {
-        "registry": "https://git.wanadev.org/api/v4/projects/1191/packages/npm/"
-    },
-    "description": "List CSS variables definitions in CSS",
+    "description": "Extract CSS variable and export them to a JavaScript object",
     "main": "src/parser.js",
     "scripts": {
         "test": "NODE_OPTIONS='--experimental-vm-modules' jest"
     },
-    "author": "Damien Fernandes",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/wanadev/css-var-parser.git"
+    },
+    "author": "Wanadev <http://www.wanadev.fr/>",
     "license": "BSD-3-Clause",
     "dependencies": {
         "postcss": "^8.4.28"
@@ -20,3 +21,4 @@
         "jest": "^29.7.0"
     }
 }
+

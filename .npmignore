@@ -1,3 +1,6 @@
 examples/
 .vscode/
 .editorconfig
+.prettierrc
+.github/
+src/*.test.js
