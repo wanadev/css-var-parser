@@ -4,3 +4,4 @@ examples/
 .prettierrc
 .github/
 src/*.test.js
+RELEASE.rst
