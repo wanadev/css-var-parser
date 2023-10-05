@@ -1,6 +1,6 @@
 {
     "name": "css-var-parser",
-    "version": "0.4.0",
+    "version": "0.4.1",
     "type": "module",
     "description": "Extract CSS variable and export them to a JavaScript object",
     "main": "src/parser.js",

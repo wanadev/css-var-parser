@@ -73,5 +73,9 @@ Output:
 
 * **[NEXT]** (changes on master that have not been released yet):
 
+    * Nothing yet ;)
+
+* **v0.4.1:**
+
     * Changed package name for its first public release
     * First public release
